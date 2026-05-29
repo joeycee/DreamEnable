@@ -1,9 +1,14 @@
 import { ContactForm } from "@/components/forms/contact-form";
 import { Container } from "@/components/ui/container";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Contact · Carden Studio",
-};
+export const metadata = createPageMetadata({
+  title: "Contact",
+  description:
+    "Contact Carden Studio to discuss a website redesign, business website, or custom web application project in New Zealand or Australia.",
+  path: "/contact",
+  keywords: ["contact web developer", "website project enquiry", "custom web app consultation"],
+});
 
 export default function ContactPage() {
   return (

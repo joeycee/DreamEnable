@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { ExpertiseGrid } from "@/components/ui/expertise-grid";
+import { createPageMetadata } from "@/lib/seo";
 
 const capabilities = [
   {
@@ -46,9 +47,13 @@ const approach = [
   "Clean handover and maintainable code",
 ];
 
-export const metadata = {
-  title: "Expertise · Carden Studio",
-};
+export const metadata = createPageMetadata({
+  title: "Expertise",
+  description:
+    "Explore Carden Studio's expertise across Next.js, React, TypeScript, Django, PostgreSQL, cloud infrastructure, and Stripe-powered product delivery.",
+  path: "/offerings",
+  keywords: ["Next.js development", "React agency", "Django development", "Stripe integrations"],
+});
 
 export default function ExpertisePage() {
   return (

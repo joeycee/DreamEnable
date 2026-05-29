@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const expertise = [
   {
@@ -72,12 +71,10 @@ export function ExpertiseExpandable() {
   const [expanded, setExpanded] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [revealCount, setRevealCount] = useState(VISIBLE_COUNT);
-  const [scanActive, setScanActive] = useState(false);
 
   function handleExpand() {
     if (animating) return;
     setAnimating(true);
-    setScanActive(true);
 
     // Stagger reveal each hidden item
     expertise.slice(VISIBLE_COUNT).forEach((_, i) => {
@@ -89,7 +86,6 @@ export function ExpertiseExpandable() {
     setTimeout(() => {
       setExpanded(true);
       setAnimating(false);
-      setScanActive(false);
     }, 60 + (expertise.length - VISIBLE_COUNT) * 70 + 300);
   }
 
@@ -121,7 +117,6 @@ export function ExpertiseExpandable() {
             key={item.label}
             item={item}
             isNew={i >= VISIBLE_COUNT}
-            index={i}
           />
         ))}
       </div>
@@ -186,14 +181,11 @@ export function ExpertiseExpandable() {
 function ExpertiseItem({
   item,
   isNew,
-  index,
 }: {
   item: (typeof expertise)[0];
   isNew: boolean;
-  index: number;
 }) {
   const [mounted, setMounted] = useState(!isNew);
-  const [glowing, setGlowing] = useState(false);
 
   useEffect(() => {
     if (isNew) {
@@ -201,15 +193,7 @@ function ExpertiseItem({
       return () => clearTimeout(t);
     }
   }, [isNew]);
-
-  // Brief glow flash when newly revealed
-  useEffect(() => {
-    if (isNew && mounted) {
-      setGlowing(true);
-      const t = setTimeout(() => setGlowing(false), 600);
-      return () => clearTimeout(t);
-    }
-  }, [mounted, isNew]);
+  const glowing = isNew && mounted;
 
   return (
     <div
@@ -221,6 +205,7 @@ function ExpertiseItem({
         opacity: mounted ? 1 : 0,
         transform: mounted ? "translateY(0) scale(1)" : "translateY(10px) scale(0.96)",
         transition: "opacity 0.35s ease, transform 0.35s ease, box-shadow 0.4s ease, border-color 0.4s ease",
+        animation: glowing ? "expertiseGlow 0.6s ease-out 1" : "none",
         cursor: "default",
       }}
       onMouseEnter={(e) => {
@@ -242,7 +227,19 @@ function ExpertiseItem({
           border: "1px solid var(--color-line)",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <style>{`
+          @keyframes expertiseGlow {
+            0% {
+              box-shadow: 0 0 0 rgba(43,108,176,0);
+            }
+            45% {
+              box-shadow: 0 0 16px rgba(43,108,176,0.15), 0 0 0 1px rgba(43,108,176,0.2);
+            }
+            100% {
+              box-shadow: none;
+            }
+          }
+        `}</style>
         <img
           src={item.logo}
           alt={item.label}

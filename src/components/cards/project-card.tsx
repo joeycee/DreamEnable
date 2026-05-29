@@ -12,7 +12,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const imageUrl = resolveAssetUrl(project.featured_image);
-  const detailHref = `/work/${project.id}`;
+  const detailHref = `/work/${project.slug}`;
   const [hovered, setHovered] = useState(false);
 
   return (

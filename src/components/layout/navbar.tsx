@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { Container } from "@/components/ui/container";
@@ -20,10 +20,7 @@ const navigation = [
 export function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  const handleNavLinkClick = () => setIsOpen(false);
 
   return (
     <header
@@ -40,6 +37,7 @@ export function Navbar() {
             href="/"
             aria-label="Carden Studio home"
             className="flex min-w-0 flex-1 items-center md:flex-none"
+            onClick={handleNavLinkClick}
           >
             <Logo />
           </Link>
@@ -51,6 +49,7 @@ export function Navbar() {
                 <Link
                   key={href}
                   href={href}
+                  onClick={handleNavLinkClick}
                   className={[
                     "relative rounded-md px-3 py-1.5 text-sm transition-colors duration-150",
                     active
@@ -69,6 +68,7 @@ export function Navbar() {
 
           <Link
             href="/contact"
+            onClick={handleNavLinkClick}
             className="hidden shrink-0 items-center rounded-full border border-[var(--color-accent-warm)] bg-[var(--color-accent-warm)] px-4 py-2 text-sm font-semibold text-[var(--color-white)] transition-all duration-150 hover:bg-[var(--color-accent-warm-hover)] md:inline-flex"
           >
             Book a project
@@ -115,6 +115,7 @@ export function Navbar() {
                 <Link
                   key={href}
                   href={href}
+                  onClick={handleNavLinkClick}
                   className={cn(
                     "block rounded-xl px-4 py-3 text-sm transition-colors duration-150",
                     active
@@ -129,6 +130,7 @@ export function Navbar() {
 
             <Link
               href="/contact"
+              onClick={handleNavLinkClick}
               className="mt-2 flex items-center justify-center rounded-xl border border-[var(--color-accent-warm)] bg-[var(--color-accent-warm)] px-4 py-3 text-sm font-semibold text-[var(--color-white)] transition-all duration-150 hover:bg-[var(--color-accent-warm-hover)]"
             >
               Book a project

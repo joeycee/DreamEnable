@@ -1,10 +1,15 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "About · Carden Studio",
-};
+export const metadata = createPageMetadata({
+  title: "About",
+  description:
+    "Learn about Carden Studio, a founder-led web development studio in Auckland focused on premium websites, custom apps, and clear commercial thinking.",
+  path: "/about",
+  keywords: ["about Carden Studio", "Auckland web studio", "founder-led development partner"],
+});
 
 export default function AboutPage() {
   return (

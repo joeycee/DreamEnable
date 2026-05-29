@@ -10,6 +10,21 @@ import { Container } from "@/components/ui/container";
 import { ExpertiseExpandable } from "@/components/ui/expertise-expandable";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getBlogPosts, getPortfolioProjects, getTestimonials } from "@/lib/api";
+import { absoluteUrl, createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Founder-Led Web Development Studio",
+  description:
+    "Carden Studio builds premium websites, custom web apps, and SEO-aware digital products for growing businesses across Auckland, New Zealand, and Australia.",
+  path: "/",
+  keywords: [
+    "premium websites",
+    "Auckland web developer",
+    "New Zealand web design",
+    "custom web apps",
+    "SEO-friendly web development",
+  ],
+});
 
 export default async function HomePage() {
   const [testimonials, posts, projects] = await Promise.all([
@@ -23,9 +38,43 @@ export default async function HomePage() {
   const featuredProjects = [...projects]
     .sort((a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order)
     .slice(0, 2);
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        name: "Carden Studio",
+        description:
+          "Founder-led web development studio building premium websites and custom digital products.",
+        areaServed: ["New Zealand", "Australia"],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Auckland",
+          addressCountry: "NZ",
+        },
+        url: absoluteUrl("/"),
+        serviceType: [
+          "Website development",
+          "Custom web applications",
+          "Technical SEO foundations",
+          "Digital product development",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        name: "Carden Studio",
+        url: absoluteUrl("/"),
+        inLanguage: "en-NZ",
+      },
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
+      />
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden pb-24 pt-20 sm:pb-32 sm:pt-28">
         {/* Decorative background orbs */}
@@ -85,8 +134,9 @@ export default async function HomePage() {
             className="mt-8 max-w-2xl text-lg leading-8 sm:text-xl"
             style={{ color: "var(--color-muted)" }}
           >
-            Carden Studio helps growing businesses launch premium web experiences with the
-            clarity, polish, and practical thinking you&apos;d expect from a founder-led partner.
+            Carden Studio helps growing businesses launch premium websites, custom web
+            applications, and SEO-aware digital experiences with the clarity, polish, and
+            practical thinking you&apos;d expect from a founder-led partner.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -164,6 +214,45 @@ export default async function HomePage() {
                 />
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="pb-24">
+        <Container>
+          <div
+            className="grid gap-8 rounded-3xl p-8 sm:p-10 lg:grid-cols-[0.8fr_1.2fr]"
+            style={{
+              background: "var(--color-surface)",
+              border: "1px solid var(--color-line)",
+            }}
+          >
+            <div>
+              <p
+                className="text-xs font-semibold uppercase tracking-[0.28em]"
+                style={{ color: "var(--color-accent)" }}
+              >
+                Auckland web development
+              </p>
+              <h2
+                className="mt-4 text-3xl font-semibold tracking-[-0.03em]"
+                style={{ color: "var(--color-ink)" }}
+              >
+                Built for businesses that need a sharper website and stronger search visibility.
+              </h2>
+            </div>
+            <div className="space-y-4 text-sm leading-8" style={{ color: "var(--color-muted)" }}>
+              <p>
+                Based in Auckland and working across New Zealand and Australia, Carden Studio
+                creates business websites and custom digital products that are fast, accessible,
+                technically clean, and easy for search engines to understand.
+              </p>
+              <p>
+                That means clear information architecture, metadata that supports better snippets,
+                structured content, and development choices that help your site earn trust from
+                both people and crawlers.
+              </p>
+            </div>
           </div>
         </Container>
       </section>

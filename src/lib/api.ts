@@ -77,9 +77,14 @@ export async function getPortfolioProjects() {
   });
 }
 
-export async function getPortfolioProjectById(id: string | number) {
+export async function getPortfolioProjectById(idOrSlug: string | number) {
   const projects = await getPortfolioProjects();
-  return projects.find((project) => String(project.id) === String(id)) ?? null;
+  const lookup = String(idOrSlug);
+  return (
+    projects.find(
+      (project) => String(project.id) === lookup || project.slug === lookup,
+    ) ?? null
+  );
 }
 
 export async function submitContactForm(payload: ContactPayload) {

@@ -1,10 +1,15 @@
 import { TestimonialCard } from "@/components/cards/testimonial-card";
 import { Container } from "@/components/ui/container";
 import { getTestimonials } from "@/lib/api";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Testimonials · Carden Studio",
-};
+export const metadata = createPageMetadata({
+  title: "Testimonials",
+  description:
+    "See what clients say about working with Carden Studio on premium websites, service business sites, and custom web application projects.",
+  path: "/testimonials",
+  keywords: ["web design testimonials", "client feedback", "website project reviews"],
+});
 
 export default async function TestimonialsPage() {
   const testimonials = await getTestimonials();

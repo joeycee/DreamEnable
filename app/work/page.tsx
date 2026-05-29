@@ -3,10 +3,15 @@ import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getPortfolioProjects } from "@/lib/api";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Work",
-};
+  description:
+    "Browse selected Carden Studio projects spanning premium websites, digital products, and custom business platforms built for clarity, trust, and performance.",
+  path: "/work",
+  keywords: ["web development portfolio", "website case studies", "custom app projects"],
+});
 
 export default async function WorkPage() {
   const projects = await getPortfolioProjects().catch(() => []);

@@ -1,10 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AnimatedBlock } from "./animated-block";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { getPortfolioProjectById } from "@/lib/api";
+import { getPortfolioProjectById, getPortfolioProjects } from "@/lib/api";
+import { absoluteUrl } from "@/lib/seo";
 import { resolveAssetUrl, splitParagraphs } from "@/lib/utils";
 
 /* ─── types ─── */
@@ -13,15 +15,43 @@ type WorkDetailPageProps = {
 };
 
 /* ─── metadata (server) ─── */
-export async function generateMetadata({ params }: WorkDetailPageProps) {
+export async function generateMetadata({ params }: WorkDetailPageProps): Promise<Metadata> {
   try {
     const { id } = await params;
     const project = await getPortfolioProjectById(id);
     if (!project) return { title: "Work" };
-    return { title: project.title, description: project.short_description };
+    const image = resolveAssetUrl(project.featured_image);
+
+    return {
+      title: project.title,
+      description: project.short_description,
+      alternates: {
+        canonical: absoluteUrl(`/work/${project.slug}`),
+      },
+      openGraph: {
+        type: "article",
+        url: absoluteUrl(`/work/${project.slug}`),
+        title: `${project.title} | Carden Studio`,
+        description: project.short_description,
+        modifiedTime: project.updated_at,
+        images: image ? [{ url: image, alt: project.title }] : undefined,
+      },
+      twitter: {
+        card: image ? "summary_large_image" : "summary",
+        title: `${project.title} | Carden Studio`,
+        description: project.short_description,
+        images: image ? [image] : undefined,
+      },
+    };
   } catch {
     return { title: "Work" };
   }
+}
+
+export async function generateStaticParams() {
+  const projects = await getPortfolioProjects().catch(() => []);
+
+  return projects.map((project) => ({ id: project.slug }));
 }
 
 /* ─── page ─── */
@@ -35,6 +65,24 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: project.title,
+            description: project.short_description,
+            url: absoluteUrl(`/work/${project.slug}`),
+            image: imageUrl ?? undefined,
+            creator: {
+              "@type": "Organization",
+              name: "Carden Studio",
+            },
+            dateModified: project.updated_at,
+          }),
+        }}
+      />
       {/* inject styles once */}
       <style>{css}</style>
 
