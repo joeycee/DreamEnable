@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
 
-const SITE_NAME = "Carden Studio";
-const DEFAULT_TITLE = "Founder-Led Web Development Studio";
+const SITE_NAME = "DreamEnable";
+const DEFAULT_TITLE = "AI Tools, Web Apps, and Automation for Growing Businesses";
 const DEFAULT_DESCRIPTION =
-  "Carden Studio is a founder-led web development studio in Auckland building premium websites, custom web apps, and conversion-minded digital products for businesses across New Zealand and Australia.";
+  "DreamEnable is a founder-led digital studio in Auckland building AI tools, custom web apps, automation systems, and SEO-ready websites for businesses across New Zealand and Australia.";
 const DEFAULT_KEYWORDS = [
-  "Carden Studio",
+  "DreamEnable",
+  "AI automation agency",
+  "AI tools for business",
+  "automation agency",
   "web development studio",
   "Auckland web developer",
-  "New Zealand web development",
+  "New Zealand web app developer",
   "Australia web development",
   "Next.js agency",
   "custom web applications",
+  "business automation",
   "business website development",
-  "SEO-friendly websites",
+  "SEO-ready websites",
+  "technical SEO",
   "founder-led web studio",
 ];
 

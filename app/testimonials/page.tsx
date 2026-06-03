@@ -6,9 +6,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Testimonials",
   description:
-    "See what clients say about working with Carden Studio on premium websites, service business sites, and custom web application projects.",
+    "See what clients say about working with DreamEnable on premium websites, AI tools, automation systems, and custom web application projects.",
   path: "/testimonials",
-  keywords: ["web design testimonials", "client feedback", "website project reviews"],
+  keywords: ["web design testimonials", "client feedback", "AI project reviews"],
 });
 
 export default async function TestimonialsPage() {

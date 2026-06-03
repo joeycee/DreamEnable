@@ -26,16 +26,15 @@ export function Navbar() {
     <header
       className="sticky top-0 z-40 border-b backdrop-blur-xl backdrop-saturate-150"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(42,52,57,0.94) 0%, rgba(31,38,42,0.92) 100%)",
-        borderColor: "rgba(74, 86, 94, 0.65)",
+        background: "#ffffff",
+        borderColor: "rgba(46,127,176,0.16)",
       }}
     >
       <Container className="min-w-0">
         <div className="flex h-16 min-w-0 items-center justify-between gap-4">
           <Link
             href="/"
-            aria-label="Carden Studio home"
+            aria-label="DreamEnable home"
             className="flex min-w-0 flex-1 items-center md:flex-none"
             onClick={handleNavLinkClick}
           >
@@ -53,8 +52,8 @@ export function Navbar() {
                   className={[
                     "relative rounded-md px-3 py-1.5 text-sm transition-colors duration-150",
                     active
-                      ? "font-semibold text-[var(--color-text-primary)]"
-                      : "font-normal text-[var(--color-text-secondary)] hover:bg-[rgba(107,138,153,0.14)] hover:text-[var(--color-text-primary)]",
+                      ? "font-semibold text-[#102636]"
+                      : "font-normal text-[#102636]/80 hover:bg-[rgba(46,127,176,0.08)] hover:text-[#102636]",
                   ].join(" ")}
                 >
                   {label}
@@ -69,7 +68,13 @@ export function Navbar() {
           <Link
             href="/contact"
             onClick={handleNavLinkClick}
-            className="hidden shrink-0 items-center rounded-full border border-[var(--color-accent-warm)] bg-[var(--color-accent-warm)] px-4 py-2 text-sm font-semibold text-[var(--color-white)] transition-all duration-150 hover:bg-[var(--color-accent-warm-hover)] md:inline-flex"
+            className="hidden shrink-0 items-center rounded-full border px-4 py-2 text-sm font-semibold text-[var(--color-white)] transition-all duration-150 hover:-translate-y-0.5 md:inline-flex"
+            style={{
+              background: "#ffffff",
+              borderColor: "#d97745",
+              color: "#111111",
+              boxShadow: "0 2px 10px rgba(17,17,17,0.05)",
+            }}
           >
             Book a project
           </Link>
@@ -106,7 +111,7 @@ export function Navbar() {
           )}
         >
           <nav
-            className="rounded-2xl border border-[rgba(74,86,94,0.65)] bg-[rgba(31,38,42,0.92)] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.28)]"
+            className="rounded-2xl border border-[rgba(46,127,176,0.16)] bg-white p-2 shadow-[0_20px_50px_rgba(26,61,90,0.08)]"
             style={{ backdropFilter: "blur(18px) saturate(150%)" }}
           >
             {navigation.map(({ href, label }) => {
@@ -119,8 +124,8 @@ export function Navbar() {
                   className={cn(
                     "block rounded-xl px-4 py-3 text-sm transition-colors duration-150",
                     active
-                      ? "bg-[rgba(107,138,153,0.14)] font-semibold text-[var(--color-text-primary)]"
-                      : "text-[var(--color-text-secondary)] hover:bg-[rgba(107,138,153,0.14)] hover:text-[var(--color-text-primary)]",
+                      ? "bg-[rgba(46,127,176,0.08)] font-semibold text-[#102636]"
+                      : "text-[#102636]/85 hover:bg-[rgba(46,127,176,0.08)] hover:text-[#102636]",
                   )}
                 >
                   {label}
@@ -131,7 +136,13 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={handleNavLinkClick}
-              className="mt-2 flex items-center justify-center rounded-xl border border-[var(--color-accent-warm)] bg-[var(--color-accent-warm)] px-4 py-3 text-sm font-semibold text-[var(--color-white)] transition-all duration-150 hover:bg-[var(--color-accent-warm-hover)]"
+              className="mt-2 flex items-center justify-center rounded-xl border px-4 py-3 text-sm font-semibold text-[var(--color-white)] transition-all duration-150 hover:-translate-y-0.5"
+              style={{
+                background: "#ffffff",
+                borderColor: "#d97745",
+                color: "#111111",
+                boxShadow: "0 2px 10px rgba(17,17,17,0.05)",
+              }}
             >
               Book a project
             </Link>

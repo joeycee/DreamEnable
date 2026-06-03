@@ -8,11 +8,11 @@ export function Footer() {
       <Container className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-lg font-semibold tracking-[-0.04em] text-[var(--color-ink)]">
-            Carden Studio
+            DreamEnable
           </p>
           <p className="mt-3 max-w-md text-sm leading-7 text-[var(--color-muted)]">
-            Founder-led web development for businesses that want a clean, credible,
-            conversion-minded digital presence.
+            Founder-led digital product development for businesses that want stronger positioning,
+            sharper SEO foundations, and practical automation that supports growth.
           </p>
         </div>
         <div className="flex flex-wrap gap-5 text-sm text-[var(--color-muted)]">

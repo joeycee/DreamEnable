@@ -201,22 +201,13 @@ export function ContactForm() {
       </div>
 
       {/* Row 3 */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field
-          label="Budget range"
-          name="budget_range"
-          onChange={(v) => setForm((f) => ({ ...f, budget_range: v }))}
-          placeholder="e.g. $3k – $8k"
-          value={form.budget_range}
-        />
-        <Field
-          label="Timeline"
-          name="timeline"
-          onChange={(v) => setForm((f) => ({ ...f, timeline: v }))}
-          placeholder="e.g. 4 – 6 weeks"
-          value={form.timeline}
-        />
-      </div>
+      <Field
+        label="Timeline"
+        name="timeline"
+        onChange={(v) => setForm((f) => ({ ...f, timeline: v }))}
+        placeholder="e.g. 4 – 6 weeks"
+        value={form.timeline}
+      />
 
       {/* Message */}
       <div>

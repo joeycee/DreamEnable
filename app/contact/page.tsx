@@ -5,9 +5,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Carden Studio to discuss a website redesign, business website, or custom web application project in New Zealand or Australia.",
+    "Contact DreamEnable to discuss an AI tool, business automation system, website redesign, or custom web application project in New Zealand or Australia.",
   path: "/contact",
-  keywords: ["contact web developer", "website project enquiry", "custom web app consultation"],
+  keywords: ["contact web developer", "AI automation consultation", "custom web app consultation"],
 });
 
 export default function ContactPage() {

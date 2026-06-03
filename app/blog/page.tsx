@@ -5,9 +5,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Blog",
   description:
-    "Read Carden Studio articles on web development, SEO-aware websites, positioning, digital product strategy, and building a stronger online presence.",
+    "Read DreamEnable articles on AI tools, web development, automation, SEO-ready websites, positioning, and digital product strategy.",
   path: "/blog",
-  keywords: ["web development blog", "SEO website advice", "digital product strategy"],
+  keywords: ["AI business blog", "SEO website advice", "digital product strategy"],
 });
 
 export default async function BlogPage() {

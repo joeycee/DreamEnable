@@ -3,25 +3,25 @@ import Link from "next/link";
 import { BlogCard } from "@/components/cards/blog-card";
 import { ProjectCard } from "@/components/cards/project-card";
 import { TestimonialCard } from "@/components/cards/testimonial-card";
-import { CtaSection } from "@/components/ui/cta-section";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
+import { DreamEnableHero } from "@/components/ui/dream-enable-hero";
 import { ExpertiseExpandable } from "@/components/ui/expertise-expandable";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getBlogPosts, getPortfolioProjects, getTestimonials } from "@/lib/api";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Founder-Led Web Development Studio",
+  title: "AI, Web Apps, and Automation for Ambitious Businesses",
   description:
-    "Carden Studio builds premium websites, custom web apps, and SEO-aware digital products for growing businesses across Auckland, New Zealand, and Australia.",
+    "DreamEnable builds AI tools, custom web apps, automations, and SEO-aware digital products for growing businesses across New Zealand and Australia.",
   path: "/",
   keywords: [
-    "premium websites",
+    "AI automation agency",
     "Auckland web developer",
-    "New Zealand web design",
+    "New Zealand web app developer",
     "custom web apps",
+    "AI tools for business",
+    "business automation",
     "SEO-friendly web development",
   ],
 });
@@ -38,14 +38,15 @@ export default async function HomePage() {
   const featuredProjects = [...projects]
     .sort((a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order)
     .slice(0, 2);
+
   const homeSchema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "ProfessionalService",
-        name: "Carden Studio",
+        name: "DreamEnable",
         description:
-          "Founder-led web development studio building premium websites and custom digital products.",
+          "Founder-led software studio building AI tools, custom web apps, automations, and SEO-aware digital products.",
         areaServed: ["New Zealand", "Australia"],
         address: {
           "@type": "PostalAddress",
@@ -54,15 +55,17 @@ export default async function HomePage() {
         },
         url: absoluteUrl("/"),
         serviceType: [
-          "Website development",
+          "AI business tools",
           "Custom web applications",
+          "Business automation",
+          "Website development",
           "Technical SEO foundations",
           "Digital product development",
         ],
       },
       {
         "@type": "WebSite",
-        name: "Carden Studio",
+        name: "DreamEnable",
         url: absoluteUrl("/"),
         inLanguage: "en-NZ",
       },
@@ -75,121 +78,41 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
       />
+
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden pb-24 pt-20 sm:pb-32 sm:pt-28">
-        {/* Decorative background orbs */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(ellipse 70% 60% at 65% 0%, rgba(43,108,176,0.09) 0%, transparent 70%),
-              radial-gradient(ellipse 40% 40% at 10% 80%, rgba(43,108,176,0.06) 0%, transparent 60%)
-            `,
-          }}
-        />
-        {/* Thin horizontal rule accent */}
-        <div
-          aria-hidden
-          className="absolute left-0 right-0 top-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(43,108,176,0.25) 40%, rgba(43,108,176,0.25) 60%, transparent)" }}
-        />
+      <DreamEnableHero />
 
-        <Container className="relative">
-          {/* Eyebrow */}
-          <div className="flex items-center gap-3">
-            <span
-              className="inline-block h-px w-8"
-              style={{ background: "var(--color-accent)" }}
-            />
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.32em]"
-              style={{ color: "var(--color-accent)" }}
-            >
-              Founder-led web studio · NZ &amp; AU
-            </p>
-          </div>
+      
 
-          {/* Headline */}
-          <h1
-            className="display-copy mt-6 max-w-4xl text-5xl tracking-[-0.04em] sm:text-6xl lg:text-[5.25rem] lg:leading-[1.04]"
-            style={{ color: "var(--color-ink)", fontWeight: 600 }}
-          >
-            Websites &amp; digital products that feel{" "}
-            <em
-              className="not-italic"
-              style={{
-                background: "linear-gradient(135deg, #2B6CB0 0%, #4A8DB5 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              sharp, credible,
-            </em>{" "}
-            and ready to sell.
-          </h1>
-
-          <p
-            className="mt-8 max-w-2xl text-lg leading-8 sm:text-xl"
-            style={{ color: "var(--color-muted)" }}
-          >
-            Carden Studio helps growing businesses launch premium websites, custom web
-            applications, and SEO-aware digital experiences with the clarity, polish, and
-            practical thinking you&apos;d expect from a founder-led partner.
-          </p>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Button href="/contact">Start your project</Button>
-            <Button href="/offerings" variant="secondary">
-              Our Stack
-            </Button>
-          </div>
-
-          
-        </Container>
-      </section>
-
-      {/* ── TRUST STRIP ──────────────────────────────────────────────────── */}
-      <section
-        className="border-y py-5"
-        style={{
-          borderColor: "var(--color-line)",
-          background: "var(--color-surface)",
-        }}
-      >
-        
-      </section>
-
-      {/* ── WHY CARDEN ───────────────────────────────────────────────────── */}
+      {/* ── WHY DREAM ENABLE ─────────────────────────────────────────────── */}
       <section className="pb-24 pt-20">
         <Container>
           <SectionHeading
-            eyebrow="Why Carden Studio"
-            title="A business-minded development partner for teams that need more than nice visuals."
-            description="The goal is not to ship more pages. It's to create a web presence that explains your value clearly, builds trust quickly, and supports real commercial outcomes."
+            eyebrow="Why DreamEnable"
+            title="A focused partner that cares about outcomes, not just deliverables."
+            description="We don't ship pages — we create digital presences that explain your value clearly, earn trust fast, and support the growth you're working toward."
           />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
                 icon: "◈",
-                title: "Thoughtful positioning",
-                copy: "Clear messaging and premium structure so visitors understand what you do and why it matters in the first ten seconds.",
+                title: "Clear positioning",
+                copy: "Messaging and structure that communicates what you do and why it matters within the first ten seconds of a visit.",
               },
               {
                 icon: "⬡",
-                title: "Practical development",
-                copy: "Modern builds with clean implementation choices that stay maintainable as the business grows and requirements shift.",
+                title: "Clean, lasting code",
+                copy: "Modern builds with thoughtful implementation choices that stay maintainable as your business grows and your needs evolve.",
               },
               {
                 icon: "◎",
-                title: "Founder-level care",
-                copy: "Direct communication, sensible tradeoffs, and a build process that stays close to the work — not hidden behind account management.",
+                title: "Direct collaboration",
+                copy: "You work with us — not an account manager. Honest conversations, fast decisions, and care that stays close to the work.",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="group relative rounded-2xl p-7 transition-shadow duration-300 hover:shadow-md"
+                className="group relative rounded-2xl p-7 transition-shadow duration-300 hover:shadow-sm"
                 style={{
                   background: "var(--color-surface)",
                   border: "1px solid var(--color-line)",
@@ -207,7 +130,6 @@ export default async function HomePage() {
                 <p className="mt-3 text-sm leading-7" style={{ color: "var(--color-muted)" }}>
                   {item.copy}
                 </p>
-                {/* Bottom accent line on hover */}
                 <span
                   className="absolute bottom-0 left-7 right-7 h-px scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100"
                   style={{ background: "var(--color-accent)", transformOrigin: "left" }}
@@ -218,6 +140,7 @@ export default async function HomePage() {
         </Container>
       </section>
 
+      {/* ── LOCAL SIGNAL ─────────────────────────────────────────────────── */}
       <section className="pb-24">
         <Container>
           <div
@@ -232,25 +155,25 @@ export default async function HomePage() {
                 className="text-xs font-semibold uppercase tracking-[0.28em]"
                 style={{ color: "var(--color-accent)" }}
               >
-                Auckland web development
+                Auckland · New Zealand &amp; Australia
               </p>
               <h2
                 className="mt-4 text-3xl font-semibold tracking-[-0.03em]"
                 style={{ color: "var(--color-ink)" }}
               >
-                Built for businesses that need a sharper website and stronger search visibility.
+                Built for businesses that want a sharper web presence and better search visibility.
               </h2>
             </div>
             <div className="space-y-4 text-sm leading-8" style={{ color: "var(--color-muted)" }}>
               <p>
-                Based in Auckland and working across New Zealand and Australia, Carden Studio
-                creates business websites and custom digital products that are fast, accessible,
-                technically clean, and easy for search engines to understand.
+                Based in Auckland and working with businesses across New Zealand and Australia,
+                DreamEnable creates AI tools, websites, and custom digital products that are fast,
+                accessible, technically clean, and structured for search engines to understand.
               </p>
               <p>
-                That means clear information architecture, metadata that supports better snippets,
-                structured content, and development choices that help your site earn trust from
-                both people and crawlers.
+                That means solid information architecture, metadata that improves your snippets,
+                structured content, and development decisions that help your site earn credibility
+                with both people and crawlers from day one.
               </p>
             </div>
           </div>
@@ -262,19 +185,17 @@ export default async function HomePage() {
         className="pb-24 pt-20"
         style={{
           background: `
-            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(107,138,153,0.12) 0%, transparent 70%),
+            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(178,213,232,0.14) 0%, transparent 70%),
             var(--color-bg)
           `,
         }}
       >
         <Container>
-          <div className="flex items-end justify-between gap-6">
-            <SectionHeading
-              eyebrow="Expertise"
-              title="Built with a modern stack and practical infrastructure."
-              description="Carden Studio works across proven tools and platforms to build fast, scalable, and maintainable digital products."
-            />
-          </div>
+          <SectionHeading
+            eyebrow="Expertise"
+            title="A modern stack with practical, proven infrastructure."
+            description="We work across well-chosen tools and platforms to build digital products that are fast, scalable, and maintainable long after launch."
+          />
           <ExpertiseExpandable />
         </Container>
       </section>
@@ -284,8 +205,8 @@ export default async function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="Featured work"
-            title="Selected projects built to look polished and perform with purpose."
-            description="A homepage preview of portfolio projects — presented with enough breathing room to feel premium."
+            title="Selected projects — built to look intentional and perform with purpose."
+            description="A preview of recent work, presented with the clarity we bring to every engagement."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {featuredProjects.length > 0 ? (
@@ -295,10 +216,13 @@ export default async function HomePage() {
             ) : (
               <div
                 className="flex items-center justify-center rounded-2xl p-12 lg:col-span-2"
-                style={{ background: "var(--color-surface)", border: "1px solid var(--color-line)" }}
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-line)",
+                }}
               >
                 <p className="text-sm" style={{ color: "var(--color-muted)" }}>
-                  Portfolio projects will appear here once the Django API has live entries.
+                  Portfolio projects will appear here once the API has live entries.
                 </p>
               </div>
             )}
@@ -327,8 +251,8 @@ export default async function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="Testimonials"
-            title="What working together feels like."
-            description="Proof points matter most when they feel specific, grounded, and aligned with the quality of the final product."
+            title="What working with us feels like."
+            description="Proof points land best when they're specific, grounded, and honest about the experience."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {featuredTestimonials.length > 0 ? (
@@ -337,19 +261,31 @@ export default async function HomePage() {
               ))
             ) : (
               [
-                { quote: "The site launched on time and immediately felt like the premium product we wanted. Exactly what we needed.", author: "Client name", role: "Founder, Studio Co." },
-                { quote: "Working directly with the founder meant fast decisions, no fluff, and a result we're genuinely proud to show.", author: "Client name", role: "Director, Agency Ltd." },
-                { quote: "Practical, clear, and beautifully built. The process was as good as the outcome.", author: "Client name", role: "CEO, Startup NZ" },
+                {
+                  quote: "The site launched on time and immediately felt like the premium product we wanted. Exactly what we needed.",
+                  author: "Client name",
+                  role: "Founder, Studio Co.",
+                },
+                {
+                  quote: "Working directly meant fast decisions, no fluff, and a result we're genuinely proud to show anyone.",
+                  author: "Client name",
+                  role: "Director, Agency Ltd.",
+                },
+                {
+                  quote: "Practical, clear, and beautifully built. The process was as good as the outcome.",
+                  author: "Client name",
+                  role: "CEO, Startup NZ",
+                },
               ].map((t) => (
                 <div
                   key={t.author}
                   className="rounded-2xl p-7"
-                  style={{ background: "var(--color-bg)", border: "1px solid var(--color-line)" }}
+                  style={{
+                    background: "var(--color-bg)",
+                    border: "1px solid var(--color-line)",
+                  }}
                 >
-                  <p
-                    className="text-2xl leading-none"
-                    style={{ color: "var(--color-accent)" }}
-                  >
+                  <p className="text-2xl leading-none" style={{ color: "var(--color-accent)" }}>
                     &ldquo;
                   </p>
                   <p className="mt-3 text-sm leading-7" style={{ color: "var(--color-ink)" }}>
@@ -382,8 +318,8 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Latest writing"
-              title="Thoughtful notes on websites, positioning, and practical digital growth."
-              description="New published posts flow straight through from the backend as soon as they're live."
+              title="Notes on websites, positioning, and practical digital growth."
+              description="New posts publish straight from the backend as soon as they're live."
             />
             <Link
               className="hidden shrink-0 text-sm font-semibold transition hover:opacity-70 md:block"
@@ -399,10 +335,13 @@ export default async function HomePage() {
             ) : (
               <div
                 className="flex items-center justify-center rounded-2xl p-12 lg:col-span-3"
-                style={{ background: "var(--color-surface)", border: "1px solid var(--color-line)" }}
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-line)",
+                }}
               >
                 <p className="text-sm" style={{ color: "var(--color-muted)" }}>
-                  Latest blog posts will appear here once published through Django.
+                  Latest posts will appear here once published through the CMS.
                 </p>
               </div>
             )}
@@ -414,10 +353,9 @@ export default async function HomePage() {
       <section
         className="relative overflow-hidden py-24"
         style={{
-          background: "linear-gradient(135deg, #1B3D5F 0%, #2B6CB0 60%, #4A8DB5 100%)",
+          background: "linear-gradient(135deg, #1a3d5a 0%, #2e7fb0 60%, #5aadcf 100%)",
         }}
       >
-        {/* Subtle texture overlay */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -428,31 +366,29 @@ export default async function HomePage() {
         />
         <Container className="relative text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/60">
-            Ready to get started?
+            Ready to move forward?
           </p>
-          <h2
-            className="display-copy mx-auto mt-4 max-w-2xl text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl"
-          >
-            Build something that makes the right first impression.
+          <h2 className="display-copy mx-auto mt-4 max-w-2xl text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
+            Let&apos;s build something you&apos;re proud to show the world.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/70">
-            If you want a studio site, service business website, or custom web app that feels
-            polished and commercially clear, this is a good place to start.
+            Whether it&apos;s a new website, a web application, or a digital product that needs
+            to perform — we&apos;d love to hear what you&apos;re working toward.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
               className="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition hover:-translate-y-0.5 hover:shadow-lg"
-              style={{ background: "#fff", color: "#1B3D5F" }}
+              style={{ background: "#fff", color: "#1a3d5a" }}
             >
-              Book an introduction
+              Start the conversation
             </Link>
             <Link
               href="/about"
               className="inline-flex items-center rounded-full border px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
               style={{ borderColor: "rgba(255,255,255,0.35)" }}
             >
-              Learn about the studio
+              About DreamEnable
             </Link>
           </div>
         </Container>

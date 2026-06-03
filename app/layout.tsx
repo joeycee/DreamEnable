@@ -15,13 +15,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
     default: DEFAULT_TITLE,
-    template: "%s | Carden Studio",
+    template: "%s | DreamEnable",
   },
   applicationName: SITE_NAME,
   description: DEFAULT_DESCRIPTION,
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: absoluteUrl("/"),
   },

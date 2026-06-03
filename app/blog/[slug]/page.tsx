@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       openGraph: {
         type: "article",
         url: absoluteUrl(`/blog/${post.slug}`),
-        title: `${post.title} | Carden Studio`,
+        title: `${post.title} | DreamEnable`,
         description: post.excerpt,
         publishedTime: post.published_at ?? post.created_at,
         modifiedTime: post.updated_at,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       },
       twitter: {
         card: image ? "summary_large_image" : "summary",
-        title: `${post.title} | Carden Studio`,
+        title: `${post.title} | DreamEnable`,
         description: post.excerpt,
         images: image ? [image] : undefined,
       },
@@ -76,11 +76,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             image: resolveAssetUrl(post.featured_image) ?? undefined,
             author: {
               "@type": "Organization",
-              name: "Carden Studio",
+              name: "DreamEnable",
             },
             publisher: {
               "@type": "Organization",
-              name: "Carden Studio",
+              name: "DreamEnable",
             },
           }),
         }}

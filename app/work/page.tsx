@@ -8,9 +8,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Work",
   description:
-    "Browse selected Carden Studio projects spanning premium websites, digital products, and custom business platforms built for clarity, trust, and performance.",
+    "Browse selected DreamEnable projects spanning AI tools, premium websites, digital products, and custom business platforms built for clarity, trust, and performance.",
   path: "/work",
-  keywords: ["web development portfolio", "website case studies", "custom app projects"],
+  keywords: ["web development portfolio", "AI case studies", "custom app projects"],
 });
 
 export default async function WorkPage() {

@@ -31,14 +31,14 @@ export async function generateMetadata({ params }: WorkDetailPageProps): Promise
       openGraph: {
         type: "article",
         url: absoluteUrl(`/work/${project.slug}`),
-        title: `${project.title} | Carden Studio`,
+        title: `${project.title} | DreamEnable`,
         description: project.short_description,
         modifiedTime: project.updated_at,
         images: image ? [{ url: image, alt: project.title }] : undefined,
       },
       twitter: {
         card: image ? "summary_large_image" : "summary",
-        title: `${project.title} | Carden Studio`,
+        title: `${project.title} | DreamEnable`,
         description: project.short_description,
         images: image ? [image] : undefined,
       },
@@ -77,7 +77,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
             image: imageUrl ?? undefined,
             creator: {
               "@type": "Organization",
-              name: "Carden Studio",
+              name: "DreamEnable",
             },
             dateModified: project.updated_at,
           }),

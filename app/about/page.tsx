@@ -1,14 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "About",
+  title: "About DreamEnable",
   description:
-    "Learn about Carden Studio, a founder-led web development studio in Auckland focused on premium websites, custom apps, and clear commercial thinking.",
+    "Learn about DreamEnable, a founder-led Auckland digital studio focused on AI tools, custom web apps, SEO-ready websites, and clear commercial thinking.",
   path: "/about",
-  keywords: ["about Carden Studio", "Auckland web studio", "founder-led development partner"],
+  keywords: ["about DreamEnable", "Auckland digital studio", "founder-led development partner"],
 });
 
 export default function AboutPage() {
@@ -44,7 +45,7 @@ export default function AboutPage() {
               className="text-xs font-semibold uppercase tracking-[0.32em]"
               style={{ color: "var(--color-accent)" }}
             >
-              About Carden Studio
+              About DreamEnable
             </p>
           </div>
 
@@ -169,6 +170,110 @@ export default function AboutPage() {
               ))}
             </div>
 
+          </div>
+        </Container>
+      </section>
+
+      {/* ── FOUNDER ─────────────────────────────────────────────────────── */}
+      <section className="pb-28">
+        <Container>
+          <div
+            className="relative overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12"
+            style={{
+              background: `
+                radial-gradient(ellipse 90% 90% at 0% 0%, rgba(214,236,248,0.78) 0%, transparent 58%),
+                radial-gradient(ellipse 70% 70% at 100% 20%, rgba(74,141,181,0.1) 0%, transparent 65%),
+                rgba(255,255,255,0.78)
+              `,
+              border: "1px solid rgba(46,127,176,0.14)",
+              boxShadow: "0 24px 70px rgba(26,61,90,0.08)",
+              backdropFilter: "blur(14px)",
+            }}
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(46,127,176,0.26) 40%, rgba(46,127,176,0.26) 60%, transparent 100%)",
+              }}
+            />
+
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span
+                    className="inline-block h-px w-8"
+                    style={{ background: "var(--color-accent)" }}
+                  />
+                  <p
+                    className="text-xs font-semibold uppercase tracking-[0.32em]"
+                    style={{ color: "var(--color-accent)" }}
+                  >
+                    Founder-led
+                  </p>
+                </div>
+
+                <h2
+                  className="display-copy mt-6 max-w-2xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl"
+                  style={{ color: "var(--color-ink)" }}
+                >
+                  Founder-led, not agency-layered.
+                </h2>
+
+                <div
+                  className="mt-6 max-w-2xl space-y-5 text-base leading-[1.95]"
+                  style={{ color: "var(--color-muted)" }}
+                >
+                  <p>
+                    DreamEnable is built by Joe Carden, a developer and founder who
+                    understands what it feels like to turn a rough idea into something real.
+                  </p>
+                  <p>
+                    With experience building a wide range of web applications, from polished
+                    business platforms to more bespoke digital products, Joe brings a practical,
+                    steady hand to both the technical build and the thinking around it.
+                  </p>
+                  <p>
+                    You work directly with the person thinking through the build, writing the
+                    code, shaping the user experience, and making sure the final product
+                    actually supports the business behind it. If you have a strong idea and want
+                    an experienced partner to help shape it into something credible, useful, and
+                    ready for the real world, that is exactly the kind of work DreamEnable is
+                    built for.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div
+                  className="rounded-[1.75rem] p-3 sm:p-4"
+                  style={{
+                    background: "rgba(255,255,255,0.74)",
+                    border: "1px solid rgba(46,127,176,0.16)",
+                    boxShadow: "0 22px 54px rgba(26,61,90,0.1)",
+                    backdropFilter: "blur(10px)",
+                  }}
+                >
+                  <div
+                    className="overflow-hidden rounded-[1.35rem]"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgba(214,236,248,0.42) 0%, rgba(255,255,255,0.95) 100%)",
+                    }}
+                  >
+                    <Image
+                      src="/joe.png"
+                      alt="Joe Carden, founder of DreamEnable"
+                      width={900}
+                      height={1100}
+                      className="h-auto w-full object-cover"
+                      priority={false}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </section>

@@ -1,37 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg-primary: #1F262A;
-  --color-bg-secondary: #2A3439;
-  --color-bg-tertiary: #353E43;
+  /* ── Backgrounds ───────────────────────────────────────────────────── */
+  --color-bg-primary:    #F7FAFB;   /* very light blue-white */
+  --color-bg-secondary:  #EEF4F7;   /* soft sky tint */
+  --color-bg-tertiary:   #E4EDF2;   /* slightly deeper for contrast areas */
 
-  --color-surface: #2F373C;
-  --color-surface-light: #3A444A;
+  --color-surface:       #FFFFFF;   /* card / panel surfaces */
+  --color-surface-light: #F2F7FA;   /* subtle inset surfaces */
 
-  --color-border: #3F4A51;
-  --color-border-soft: #4A565E;
+  /* ── Borders ───────────────────────────────────────────────────────── */
+  --color-border:        #D4E2EA;   /* default lines */
+  --color-border-soft:   #E4EDF2;   /* very soft dividers */
 
-  --color-text-primary: #E6ECEF;
-  --color-text-secondary: #AAB4BA;
-  --color-text-muted: #7E8A91;
+  /* ── Text ──────────────────────────────────────────────────────────── */
+  --color-text-primary:  #1A2E3B;   /* near-black navy */
+  --color-text-secondary:#4A6070;   /* mid-tone for body copy */
+  --color-text-muted:    #7A9AAD;   /* hints, captions */
 
-  --color-accent: #6B8A99;
-  --color-accent-hover: #7FA3B5;
+  /* ── Accent — nautical blue ────────────────────────────────────────── */
+  --color-accent:        #2E7FB0;   /* primary CTA / links */
+  --color-accent-hover:  #2570A0;
+  --color-accent-light:  #C8DFF0;   /* tinted backgrounds behind accent elements */
 
-  --color-accent-warm: #D17942;
-  --color-accent-warm-hover: #E08A57;
+  /* ── Warm accent (optional secondary) ─────────────────────────────── */
+  --color-accent-warm:       #D17942;
+  --color-accent-warm-hover: #C06D35;
 
-  --color-success: #4FAF8F;
-  --color-white: #FFFFFF;
+  /* ── Utility ───────────────────────────────────────────────────────── */
+  --color-success: #2A9D78;
+  --color-white:   #FFFFFF;
 
-  /* Aliases for existing component styles */
-  --background: var(--color-bg-primary);
-  --foreground: var(--color-text-primary);
-  --color-bg: var(--color-bg-primary);
-  --color-ink: var(--color-text-primary);
-  --color-muted: var(--color-text-secondary);
-  --color-accent-light: var(--color-bg-tertiary);
-  --color-line: var(--color-border);
+  /* ── Aliases (keep existing component styles working) ─────────────── */
+  --background:         var(--color-bg-primary);
+  --foreground:         var(--color-text-primary);
+  --color-bg:           var(--color-bg-primary);
+  --color-ink:          var(--color-text-primary);
+  --color-muted:        var(--color-text-secondary);
+  --color-line:         var(--color-border);
 }
 
 @theme inline {
@@ -63,16 +69,17 @@ a {
   text-decoration: none;
 }
 
+/* Subtle light-mode page wash */
 .site-background {
   background:
-    radial-gradient(circle at top left, rgba(127, 163, 181, 0.12), transparent 28%),
-    radial-gradient(circle at top right, rgba(209, 121, 66, 0.08), transparent 22%),
-    linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 48%, #1A2024 100%);
+    radial-gradient(circle at top left,  rgba(46, 127, 176, 0.07), transparent 30%),
+    radial-gradient(circle at top right, rgba(209, 121, 66, 0.05), transparent 22%),
+    linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 40%, #F7FAFB 100%);
 }
 
 ::selection {
-  background: rgba(107, 138, 153, 0.32);
-  color: var(--color-white);
+  background: rgba(46, 127, 176, 0.2);
+  color: var(--color-text-primary);
 }
 
 .display-copy {
@@ -85,4 +92,69 @@ a {
 
 .prose-copy p + p {
   margin-top: 1.5rem;
+}
+
+/* Dream Enable Hero Buttons */
+.de-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-family: var(--font-sans), "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.de-hero-btn-primary {
+  background: linear-gradient(135deg, #102636 0%, #1a3d5a 100%);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 14px 34px rgba(26, 61, 90, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.de-hero-btn-primary:hover {
+  transform: translateY(-2px);
+  border-color: #e8f4ff;
+  box-shadow:
+    0 18px 42px rgba(26, 61, 90, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.de-hero-btn-secondary {
+  background: rgba(255, 255, 255, 0.52);
+  color: #18384f;
+  border: 2px solid rgba(46, 127, 176, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 10px 26px rgba(26, 61, 90, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.48);
+}
+
+.de-hero-btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(46, 127, 176, 0.95);
+  box-shadow:
+    0 14px 32px rgba(26, 61, 90, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.de-hero-btn:focus-visible {
+  outline: 2px solid rgba(46, 127, 176, 0.65);
+  outline-offset: 4px;
 }

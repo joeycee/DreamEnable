@@ -4,9 +4,9 @@ export function Logo() {
   return (
     <object
       type="image/svg+xml"
-      data="/cardenstudio_logo_v2.svg"
-      aria-label="Carden Studio"
-      className="pointer-events-none block h-10 max-w-full w-auto sm:h-12"
+      data="/dreamenable-logo.svg"
+      aria-label="DreamEnable"
+      className="pointer-events-none block h-16 max-w-full w-auto sm:h-20"
     />
   );
 }
