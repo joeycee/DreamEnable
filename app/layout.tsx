@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import "./dream-enable-hero.css";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
