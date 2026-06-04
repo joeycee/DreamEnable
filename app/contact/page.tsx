@@ -35,7 +35,7 @@ export default function ContactPage() {
         />
 
         <Container className="relative">
-          <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="grid min-w-0 gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
 
             {/* ── Left col ── */}
             <div>
@@ -118,7 +118,7 @@ export default function ContactPage() {
 
             {/* ── Right col — form ── */}
             <div
-              className="rounded-2xl p-8 sm:p-10"
+              className="min-w-0 overflow-hidden rounded-2xl p-6 sm:p-8 lg:p-10"
               style={{
                 background: "var(--color-bg)",
                 border: "1px solid var(--color-line)",
