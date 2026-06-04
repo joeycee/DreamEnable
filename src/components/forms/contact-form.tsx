@@ -42,13 +42,18 @@ const inputBase = [
   "focus:border-[rgba(43,108,176,0.5)] focus:ring-2 focus:ring-[rgba(43,108,176,0.12)]",
 ].join(" ");
 
+const RECAPTCHA_WIDTH = 304;
+const RECAPTCHA_HEIGHT = 78;
+
 export function ContactForm() {
   const [form, setForm] = useState<ContactPayload>(initialForm);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [recaptchaScriptLoaded, setRecaptchaScriptLoaded] = useState(false);
+  const [recaptchaScale, setRecaptchaScale] = useState(1);
   const widgetIdRef = useRef<number | null>(null);
+  const recaptchaWrapperRef = useRef<HTMLDivElement | null>(null);
   const recaptchaElementId = useId().replace(/:/g, "");
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "";
   const isProduction = process.env.NODE_ENV === "production";
@@ -106,6 +111,25 @@ export function ContactForm() {
       }
     };
   }, [recaptchaElementId, recaptchaEnabled, recaptchaScriptLoaded, siteKey]);
+
+  useEffect(() => {
+    const wrapper = recaptchaWrapperRef.current;
+    if (!wrapper) {
+      return;
+    }
+
+    const updateScale = () => {
+      const nextScale = Math.min(1, wrapper.clientWidth / RECAPTCHA_WIDTH);
+      setRecaptchaScale((current) => (Math.abs(current - nextScale) < 0.01 ? current : nextScale));
+    };
+
+    updateScale();
+
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(wrapper);
+
+    return () => observer.disconnect();
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -230,7 +254,20 @@ export function ContactForm() {
       </div>
 
       <div>
-        {recaptchaEnabled ? <div id={recaptchaElementId} /> : null}
+        {recaptchaEnabled ? (
+          <div ref={recaptchaWrapperRef} className="max-w-full overflow-hidden">
+            <div
+              style={{
+                height: `${RECAPTCHA_HEIGHT * recaptchaScale}px`,
+                transform: `scale(${recaptchaScale})`,
+                transformOrigin: "top left",
+                width: `${RECAPTCHA_WIDTH}px`,
+              }}
+            >
+              <div id={recaptchaElementId} />
+            </div>
+          </div>
+        ) : null}
         {!requireRecaptcha && (
           <p className="mt-2 text-sm" style={{ color: "var(--color-muted)" }}>
             reCAPTCHA is disabled for local development.
