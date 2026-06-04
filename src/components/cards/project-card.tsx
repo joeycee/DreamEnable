@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { resolveAssetUrl } from "@/lib/utils";
+import { resolveAssetUrl, stripHtml } from "@/lib/utils";
 import { PortfolioProject } from "@/types/api";
 
 type ProjectCardProps = {
@@ -13,6 +13,7 @@ type ProjectCardProps = {
 export function ProjectCard({ project }: ProjectCardProps) {
   const imageUrl = resolveAssetUrl(project.featured_image);
   const detailHref = `/work/${project.slug}`;
+  const plainDescription = stripHtml(project.short_description);
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -132,7 +133,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           className="text-sm leading-7"
           style={{ color: "var(--color-muted)" }}
         >
-          {project.short_description}
+          {plainDescription}
         </p>
       </div>
 
