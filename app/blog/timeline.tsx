@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+import { stripHtml } from "@/lib/utils";
 import { BlogPost } from "@/types/api";
 
 type Props = { posts: BlogPost[] };
@@ -50,7 +51,7 @@ function useReveal() {
 function TimelineEntry({ post, index }: { post: BlogPost; index: number }) {
   const { ref, visible } = useReveal();
   const ts = formatTimestamp(post.published_at ?? post.created_at);
-  const excerpt = post.excerpt ?? "";
+  const excerpt = stripHtml(post.excerpt ?? "");
 
   return (
     <div

@@ -12,7 +12,7 @@ export const metadata = createPageMetadata({
 });
 
 export default async function TestimonialsPage() {
-  const testimonials = await getTestimonials();
+  const testimonials = await getTestimonials().catch(() => []);
 
   return (
     <>

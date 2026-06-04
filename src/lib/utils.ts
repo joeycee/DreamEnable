@@ -28,9 +28,10 @@ export function resolveAssetUrl(path?: string | null) {
   return new URL(path, getApiBaseUrl()).toString();
 }
 
-export function splitParagraphs(content: string) {
-  return content
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
+export function stripHtml(html = "") {
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }

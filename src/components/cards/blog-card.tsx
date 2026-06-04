@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Card } from "@/components/ui/card";
-import { formatDate, resolveAssetUrl } from "@/lib/utils";
+import { formatDate, resolveAssetUrl, stripHtml } from "@/lib/utils";
 import { BlogPost } from "@/types/api";
 
 type BlogCardProps = {
@@ -11,6 +11,7 @@ type BlogCardProps = {
 export function BlogCard({ post }: BlogCardProps) {
   const imageUrl = resolveAssetUrl(post.featured_image);
   const publishedDate = formatDate(post.published_at ?? post.created_at);
+  const excerpt = stripHtml(post.excerpt);
 
   return (
     <Card
@@ -43,7 +44,7 @@ export function BlogCard({ post }: BlogCardProps) {
         >
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h3>
-        <p className="mt-4 text-[0.96rem] leading-8 text-[var(--color-muted)]">{post.excerpt}</p>
+        <p className="mt-4 text-[0.96rem] leading-8 text-[var(--color-muted)]">{excerpt}</p>
         <Link
           className="mt-6 inline-flex text-sm font-semibold text-[var(--color-accent)] transition hover:opacity-70"
           href={`/blog/${post.slug}`}

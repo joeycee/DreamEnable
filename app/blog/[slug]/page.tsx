@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { getBlogPost, getBlogPosts } from "@/lib/api";
 import { absoluteUrl } from "@/lib/seo";
-import { formatDate, resolveAssetUrl } from "@/lib/utils";
+import { formatDate, resolveAssetUrl, stripHtml } from "@/lib/utils";
 import { BlogPost } from "@/types/api";
 import { BlogDetailClient } from "./BlogDetailClient";
 
@@ -16,10 +16,11 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
     const { slug } = await params;
     const post = await getBlogPost(slug);
     const image = resolveAssetUrl(post.featured_image);
+    const plainExcerpt = stripHtml(post.excerpt);
 
     return {
       title: post.title,
-      description: post.excerpt,
+      description: plainExcerpt,
       alternates: {
         canonical: absoluteUrl(`/blog/${post.slug}`),
       },
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
         type: "article",
         url: absoluteUrl(`/blog/${post.slug}`),
         title: `${post.title} | DreamEnable`,
-        description: post.excerpt,
+        description: plainExcerpt,
         publishedTime: post.published_at ?? post.created_at,
         modifiedTime: post.updated_at,
         images: image ? [{ url: image, alt: post.title }] : undefined,
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       twitter: {
         card: image ? "summary_large_image" : "summary",
         title: `${post.title} | DreamEnable`,
-        description: post.excerpt,
+        description: plainExcerpt,
         images: image ? [image] : undefined,
       },
     };
@@ -59,6 +60,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   } catch {
     notFound();
   }
+  const plainExcerpt = stripHtml(post.excerpt);
 
   return (
     <>
@@ -69,7 +71,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             headline: post.title,
-            description: post.excerpt,
+            description: plainExcerpt,
             datePublished: post.published_at ?? post.created_at,
             dateModified: post.updated_at,
             mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),

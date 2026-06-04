@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { getPortfolioProjectById, getPortfolioProjects } from "@/lib/api";
 import { absoluteUrl } from "@/lib/seo";
-import { resolveAssetUrl, splitParagraphs } from "@/lib/utils";
+import { resolveAssetUrl, stripHtml } from "@/lib/utils";
 
 /* ─── types ─── */
 type WorkDetailPageProps = {
@@ -21,10 +21,11 @@ export async function generateMetadata({ params }: WorkDetailPageProps): Promise
     const project = await getPortfolioProjectById(id);
     if (!project) return { title: "Work" };
     const image = resolveAssetUrl(project.featured_image);
+    const plainShortDescription = stripHtml(project.short_description);
 
     return {
       title: project.title,
-      description: project.short_description,
+      description: plainShortDescription,
       alternates: {
         canonical: absoluteUrl(`/work/${project.slug}`),
       },
@@ -32,14 +33,14 @@ export async function generateMetadata({ params }: WorkDetailPageProps): Promise
         type: "article",
         url: absoluteUrl(`/work/${project.slug}`),
         title: `${project.title} | DreamEnable`,
-        description: project.short_description,
+        description: plainShortDescription,
         modifiedTime: project.updated_at,
         images: image ? [{ url: image, alt: project.title }] : undefined,
       },
       twitter: {
         card: image ? "summary_large_image" : "summary",
         title: `${project.title} | DreamEnable`,
-        description: project.short_description,
+        description: plainShortDescription,
         images: image ? [image] : undefined,
       },
     };
@@ -61,7 +62,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
   if (!project) notFound();
 
   const imageUrl = resolveAssetUrl(project.featured_image);
-  const paragraphs = splitParagraphs(project.full_description);
+  const plainShortDescription = stripHtml(project.short_description);
 
   return (
     <>
@@ -72,7 +73,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
             "@context": "https://schema.org",
             "@type": "CreativeWork",
             name: project.title,
-            description: project.short_description,
+            description: plainShortDescription,
             url: absoluteUrl(`/work/${project.slug}`),
             image: imageUrl ?? undefined,
             creator: {
@@ -105,7 +106,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
               {project.featured ? "Featured project" : "Project"}
             </p>
             <h1 className="wdp-title">{project.title}</h1>
-            <p className="wdp-subtitle">{project.short_description}</p>
+            <p className="wdp-subtitle">{plainShortDescription}</p>
           </AnimatedBlock>
 
           {/* ── cta buttons ── */}
@@ -143,10 +144,11 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
 
           {/* ── body ── */}
           <div className="wdp-body">
-            <AnimatedBlock delay={320} className="wdp-prose">
-              {paragraphs.map((p, i) => (
-                <p key={i} className="wdp-paragraph">{p}</p>
-              ))}
+            <AnimatedBlock delay={320}>
+              <div
+                className="wdp-prose"
+                dangerouslySetInnerHTML={{ __html: project.full_description }}
+              />
             </AnimatedBlock>
           </div>
         </Container>
@@ -305,13 +307,62 @@ const css = `
   }
 
   /* prose */
-  .wdp-prose {}
-  .wdp-paragraph {
+  .wdp-prose {
     font-size: 1.0625rem;
     font-weight: 300;
     line-height: 1.85;
     color: var(--color-ink, #222);
+  }
+  .wdp-prose p {
     margin: 0 0 1.5rem;
   }
-  .wdp-paragraph:last-child { margin-bottom: 0; }
+  .wdp-prose p:last-child { margin-bottom: 0; }
+  .wdp-prose h2,
+  .wdp-prose h3,
+  .wdp-prose h4 {
+    color: var(--color-ink, #111);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 2.5rem 0 1rem;
+  }
+  .wdp-prose h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+  }
+  .wdp-prose h3 {
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+  .wdp-prose a {
+    color: var(--color-accent, #4f6ef7);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .wdp-prose strong {
+    color: var(--color-ink, #111);
+    font-weight: 600;
+  }
+  .wdp-prose ul,
+  .wdp-prose ol {
+    margin: 0 0 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .wdp-prose li {
+    margin-bottom: 0.5rem;
+  }
+  .wdp-prose blockquote {
+    margin: 2rem 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid rgba(46,127,176,0.25);
+    color: var(--color-muted, #666);
+  }
+  .wdp-prose img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    margin: 2rem 0;
+  }
 `;

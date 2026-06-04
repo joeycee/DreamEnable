@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { BlogCard } from "@/components/cards/blog-card";
@@ -8,13 +9,17 @@ import { DreamEnableHero } from "@/components/ui/dream-enable-hero";
 import { ExpertiseExpandable } from "@/components/ui/expertise-expandable";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getBlogPosts, getPortfolioProjects, getTestimonials } from "@/lib/api";
-import { absoluteUrl, createPageMetadata } from "@/lib/seo";
+import {
+  DEFAULT_OG_IMAGE,
+  absoluteUrl,
+} from "@/lib/seo";
 
-export const metadata = createPageMetadata({
-  title: "AI, Web Apps, and Automation for Ambitious Businesses",
+export const metadata: Metadata = {
+  title: {
+    absolute: "DreamEnable — Websites, Apps & AI Tools for NZ Businesses",
+  },
   description:
-    "DreamEnable builds AI tools, custom web apps, automations, and SEO-aware digital products for growing businesses across New Zealand and Australia.",
-  path: "/",
+    "Bring your startup idea, business website, app, AI tool or MVP to life with practical digital product development.",
   keywords: [
     "AI automation agency",
     "Auckland web developer",
@@ -24,7 +29,33 @@ export const metadata = createPageMetadata({
     "business automation",
     "SEO-friendly web development",
   ],
-});
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+  openGraph: {
+    title: "DreamEnable — Websites, Apps & AI Tools for NZ Businesses",
+    description:
+      "Bring your startup idea, business website, app, AI tool or MVP to life with practical digital product development.",
+    url: absoluteUrl("/"),
+    siteName: "DreamEnable",
+    type: "website",
+    images: [
+      {
+        url: absoluteUrl(DEFAULT_OG_IMAGE),
+        width: 1200,
+        height: 630,
+        alt: "DreamEnable digital product studio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DreamEnable — Websites, Apps & AI Tools for NZ Businesses",
+    description:
+      "Practical websites, custom apps, automations and MVPs for founders and small businesses.",
+    images: [absoluteUrl(DEFAULT_OG_IMAGE)],
+  },
+};
 
 export default async function HomePage() {
   const [testimonials, posts, projects] = await Promise.all([

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 
 const SITE_NAME = "DreamEnable";
-const DEFAULT_TITLE = "AI Tools, Web Apps, and Automation for Growing Businesses";
+const DEFAULT_TITLE = "DreamEnable — Websites, Apps & AI Tools for NZ Businesses";
 const DEFAULT_DESCRIPTION =
-  "DreamEnable is a founder-led digital studio in Auckland building AI tools, custom web apps, automation systems, and SEO-ready websites for businesses across New Zealand and Australia.";
+  "Bring your startup idea, business website, app, AI tool or MVP to life with practical digital product development.";
+const DEFAULT_TWITTER_DESCRIPTION =
+  "Practical websites, custom apps, automations and MVPs for founders and small businesses.";
+const DEFAULT_OG_IMAGE = "/og-image.png";
 const DEFAULT_KEYWORDS = [
   "DreamEnable",
   "AI automation agency",
@@ -40,7 +43,7 @@ export function getSiteUrl() {
     process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
     process.env.VERCEL_URL?.trim();
 
-  return normaliseUrl(configuredUrl || "http://localhost:3000");
+  return normaliseUrl(configuredUrl || "https://dreamenable.io");
 }
 
 export function absoluteUrl(path = "/") {
@@ -63,6 +66,7 @@ export function createPageMetadata({
   type = "website",
 }: PageMetadataInput): Metadata {
   const url = absoluteUrl(path);
+  const imageUrl = absoluteUrl(DEFAULT_OG_IMAGE);
 
   return {
     title,
@@ -74,17 +78,33 @@ export function createPageMetadata({
     openGraph: {
       type,
       url,
-      title: `${title} | ${SITE_NAME}`,
+      title,
       description,
       siteName: SITE_NAME,
       locale: "en_NZ",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: "DreamEnable digital product studio",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${SITE_NAME}`,
-      description,
+      title,
+      description: DEFAULT_TWITTER_DESCRIPTION,
+      images: [imageUrl],
     },
   };
 }
 
-export { DEFAULT_DESCRIPTION, DEFAULT_KEYWORDS, DEFAULT_TITLE, SITE_NAME };
+export {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_KEYWORDS,
+  DEFAULT_OG_IMAGE,
+  DEFAULT_TITLE,
+  DEFAULT_TWITTER_DESCRIPTION,
+  SITE_NAME,
+};

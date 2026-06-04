@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
+import { stripHtml } from "@/lib/utils";
 import { BlogPost } from "@/types/api";
 
 type Props = {
@@ -47,6 +48,8 @@ function Block({
 }
 
 export function BlogDetailClient({ post, imageUrl, publishedDate }: Props) {
+  const excerpt = stripHtml(post.excerpt);
+
   return (
     <>
       <style>{css}</style>
@@ -85,7 +88,7 @@ export function BlogDetailClient({ post, imageUrl, publishedDate }: Props) {
                 <span className="bdp-datestamp-value">{publishedDate}</span>
               </div>
             ) : null}
-            {post.excerpt ? <p className="bdp-excerpt">{post.excerpt}</p> : null}
+            {excerpt ? <p className="bdp-excerpt">{excerpt}</p> : null}
           </Block>
 
           <Block delay={260} className="bdp-divider-wrap">
